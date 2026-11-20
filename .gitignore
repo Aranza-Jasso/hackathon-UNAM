@@ -1,0 +1,19 @@
+.venv/
+.hackathon/.tools/
+.hackathon/.cache/
+.hackathon/.bootstrap/
+.hackathon/setup.log
+node_modules/
+dist/
+__pycache__/
+# Archivos locales: datos del sistema y rutas personales
+.DS_Store
+setup-log.txt
+
+# Llaves y credenciales: nunca al repositorio
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.aws/
