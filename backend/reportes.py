@@ -8,7 +8,7 @@ from .metricas import comparar, distribucion, filtrar, por_grupo, registros, res
 
 COLUMNAS_JUGADA = [
     "gameId", "playId", "semana", "possessionTeam", "rival", "quarter", "gameClock",
-    "down", "yardsToGo", "passResult", "playDescription", "pff_passCoverage",
+    "down", "yardsToGo", "passResult", "playDescription", "descripcion_es", "pff_passCoverage",
 ]
 
 

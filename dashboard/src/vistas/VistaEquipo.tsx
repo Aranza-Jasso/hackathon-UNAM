@@ -6,6 +6,7 @@ import { BandaEquipo, CajaError, Cargando, Seccion } from '../componentes/Comune
 import { Tarjetas } from '../componentes/Tarjetas'
 import { GraficaComparada } from '../componentes/GraficaComparada'
 import { TablaGrupos, TablaJugadas } from '../componentes/Tablas'
+import { formacion } from '../formato'
 
 type Props = { onAbrir: (gameId: number, playId: number) => void }
 
@@ -65,7 +66,7 @@ export function VistaEquipo({ onAbrir }: Props) {
           <Tarjetas datos={r.equipo} liga={r.liga} color={color} />
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             <Seccion titulo="Formación ofensiva (% de jugadas)">
-              <GraficaComparada datos={r.formaciones} color={color} nombre={r.equipo_abbr} />
+              <GraficaComparada datos={r.formaciones} color={color} nombre={r.equipo_abbr} etiqueta={formacion} />
             </Seccion>
             <Seccion titulo="Personal ofensivo · 5 más usados (% de jugadas)">
               <GraficaComparada datos={r.personal} color={color} nombre={r.equipo_abbr} />

@@ -3,6 +3,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from .traduccion import traducir
+
 RAIZ = Path(__file__).resolve().parent.parent
 DATOS = RAIZ / "data" / "nfl-big-data-bowl-regional-event-data-main" / "data"
 CARPETA_TRACKING = DATOS / "tracking"
@@ -59,6 +61,8 @@ def _cargar():
     ).astype(str)
     j["rival"] = j["defensiveTeam"]
     j["reloj_seg"] = _reloj_a_segundos(j["gameClock"])
+    # Descripción en español; la original en inglés se conserva en playDescription.
+    j["descripcion_es"] = j["playDescription"].map(traducir)
 
     qbs = (
         j.groupby("qb_id")

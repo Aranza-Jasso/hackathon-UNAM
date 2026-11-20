@@ -28,6 +28,7 @@ export type JugadaFila = {
   yardsToGo: number
   passResult: string
   playDescription: string
+  descripcion_es: string
   pff_passCoverage: string | null
 }
 
@@ -76,6 +77,7 @@ export type Tracking = {
     gameId: number
     playId: number
     playDescription: string
+    descripcion_es: string
     quarter: number
     down: number
     yardsToGo: number

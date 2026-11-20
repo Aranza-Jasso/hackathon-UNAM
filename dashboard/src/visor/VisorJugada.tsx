@@ -112,7 +112,11 @@ export function VisorJugada({ jugada, onCerrar }: { jugada: JugadaRef; onCerrar:
                 </ul>
               </div>
               <div className="tarjeta !p-3 text-xs">
-                <p className="mb-2">{j.playDescription}</p>
+                <p className="mb-1">{j.descripcion_es}</p>
+                <details className="mb-2 opacity-70">
+                  <summary className="cursor-pointer select-none">Ver original (inglés)</summary>
+                  <p className="mt-1">{j.playDescription}</p>
+                </details>
                 <p className="rounded bg-amarillo/20 p-2 text-azul-oscuro dark:text-amarillo-claro">
                   El tracking termina poco después del lanzamiento, el sack o el inicio del scramble; no incluye la recepción ni la carrera posterior.
                 </p>

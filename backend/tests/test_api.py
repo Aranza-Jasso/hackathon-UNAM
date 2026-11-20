@@ -84,6 +84,24 @@ def test_tracking_jugada_97():
     assert get("/api/jugadas/2021090900/999999/tracking").status_code == 404
 
 
+def test_descripcion_en_espanol():
+    r = get("/api/jugadas/2021090900/97/tracking").json()["jugada"]
+    assert r["playDescription"] == "(13:33) (Shotgun) T.Brady pass incomplete deep right to C.Godwin."
+    assert r["descripcion_es"] == "(13:33) (Escopeta) T.Brady pase incompleto profundo a la derecha para C.Godwin."
+    j = get("/api/partidos/2021090900/reporte").json()["jugadas"]
+    assert all(x["descripcion_es"] and x["playDescription"] for x in j)
+
+
+def test_traduccion_conserva_nombres_y_numeros():
+    import re
+    from backend.datos import JUGADAS
+    nombre = re.compile(r"\b[A-Z][a-z]*\.[A-Z][\w'-]+")
+    for o, t in zip(JUGADAS["playDescription"], JUGADAS["descripcion_es"]):
+        assert set(nombre.findall(o)) <= set(nombre.findall(t))
+        if "YAC" not in o and "yard line" not in o:
+            assert sorted(re.findall(r"-?\d+", o)) == sorted(re.findall(r"-?\d+", t))
+
+
 def test_linea_de_scrimmage():
     t = _leer_partido(2021090900)
     snap = t[t["event"].isin(["ball_snap", "autoevent_ballsnap"])].drop_duplicates("playId")[["playId", "frameId"]]

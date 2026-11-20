@@ -40,6 +40,7 @@ def tracking_jugada(game_id: int, play_id: int) -> dict | None:
     j = JUGADAS_IDX.loc[(game_id, play_id)]
     jugada = registros(pd.DataFrame([{
         "gameId": game_id, "playId": play_id, "playDescription": j["playDescription"],
+        "descripcion_es": j["descripcion_es"],
         "quarter": j["quarter"], "down": j["down"], "yardsToGo": j["yardsToGo"],
         "passResult": j["passResult"], "pff_passCoverage": j["pff_passCoverage"],
         "absoluteYardlineNumber": j["absoluteYardlineNumber"],

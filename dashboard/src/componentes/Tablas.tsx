@@ -59,7 +59,7 @@ export const TablaJugadas = memo(function TablaJugadas({ jugadas, onAbrir }: { j
               <td className="whitespace-nowrap">{downYDistancia(j.down, j.yardsToGo)}</td>
               <td><span className={`rounded px-1.5 py-0.5 text-xs font-semibold ${COLOR_RESULTADO[j.passResult] ?? ''}`}>{resultado(j.passResult)}</span></td>
               <td className="whitespace-nowrap">{j.pff_passCoverage ?? '—'}</td>
-              <td className="text-xs">{j.playDescription}</td>
+              <td className="text-xs" title={`Original: ${j.playDescription}`}>{j.descripcion_es}</td>
               <td><button className="boton !px-2 !py-1 text-xs" aria-label="Ver animación">▶</button></td>
             </tr>
           ))}
