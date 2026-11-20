@@ -78,6 +78,7 @@ Fuente de datos: `data/nfl-big-data-bowl-regional-event-data-main/data/` (`plays
 4. Cada jugador DEBERÁ dibujarse como un círculo con el color de su equipo y su `jerseyNumber`; el balón DEBERÁ distinguirse de los jugadores. El QB de la jugada (`pff_role = "Pass"`) y los defensores con `pff_hit`, `pff_hurry` o `pff_sack` = 1 DEBERÁN resaltarse, con una leyenda que lo explique.
 5. El dashboard DEBERÁ tener controles de reproducir/pausar, reiniciar, barra para moverse por frame y velocidades 0.5×, 1× y 2×. A 1×, cada frame DEBERÁ durar 100 ms (10 frames por segundo).
 6. Durante la reproducción, el dashboard DEBERÁ mostrar el número de frame, el último evento ocurrido (por ejemplo `ball_snap`, `pass_forward`, `qb_sack`) y los segundos transcurridos desde `ball_snap`.
+7. El dashboard DEBERÁ mostrar el aviso: "El tracking termina poco después del lanzamiento, el sack o el inicio del scramble; no incluye la recepción ni la carrera posterior."
 8. La animación DEBERÁ implementarse con React y SVG, sin dependencias nuevas.
 
 **Verificación:** la jugada 2021090900 / 97 (T.Brady, incompleto a C.Godwin, Cover-1) DEBERÁ tener 23 entidades en cada frame. Para comprobar que la línea de scrimmage está bien dibujada, la mediana de |x del balón en el frame de `ball_snap` − `absoluteYardlineNumber`| DEBERÁ ser menor a 1 yarda. En los primeros 10 partidos (766 jugadas) es 0.31 yardas, y no es exacta en cada jugada: en la 97 el balón está en x = 41.56 y la línea en 43. Una solicitud con un `playId` que no existe DEBERÁ devolver 404.
