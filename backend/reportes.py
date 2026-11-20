@@ -33,6 +33,8 @@ def reporte_equipo(abbr: str, down: int | None = None, distancia: str | None = N
     return {
         "equipo_abbr": abbr,
         "filtros": {"down": down, "distancia": distancia, "cuarto": cuarto},
+        # Cuartos con jugadas del equipo (sin filtros): el 5 (tiempo extra) solo si jugó tiempo extra.
+        "cuartos_disponibles": sorted(int(q) for q in del_equipo["quarter"].unique()),
         "equipo": resumen(equipo),
         "liga": resumen_liga,
         "formaciones": comparar(equipo, liga, "offenseFormation"),

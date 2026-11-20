@@ -39,7 +39,7 @@ Fuente de datos: `data/nfl-big-data-bowl-regional-event-data-main/data/` (`plays
 
 1. `GET /api/equipos` DEBERÁ devolver los 32 códigos de equipo presentes en `possessionTeam`.
 2. CUANDO el usuario elige un equipo, el sistema DEBERÁ mostrar: número de jugadas (n), % de uso por `offenseFormation`, % de uso de las 5 combinaciones de `personnelO` más usadas, % de play action, % de completos, yardas por jugada, tasa de sack, tasa de intercepción, tasa de scramble y % de jugadas con presión.
-3. El sistema DEBERÁ permitir filtrar por down (1, 2, 3, 4), distancia (corta, media, larga) y cuarto (1, 2, 3, 4, tiempo extra = 5). Las jugadas con `down = 0` (35) solo se incluyen cuando no hay filtro de down.
+3. El sistema DEBERÁ permitir filtrar por down (1, 2, 3, 4), distancia (corta, media, larga) y cuarto (1, 2, 3, 4, tiempo extra = 5). Las jugadas con `down = 0` (35) solo se incluyen cuando no hay filtro de down. La opción "Tiempo extra" DEBERÁ mostrarse solo para los equipos con jugadas en tiempo extra (14 de 32, con 2 a 17 jugadas cada uno); si estaba elegida y se cambia a un equipo sin tiempo extra, el filtro de cuarto DEBERÁ quitarse.
 4. Cada métrica DEBERÁ mostrarse junto a su promedio de liga y su n.
 5. CUANDO un grupo tenga n < 20, el dashboard DEBERÁ marcarlo como "muestra pequeña".
 6. El sistema DEBERÁ mostrar los resultados (% de completos y yardas por jugada) desglosados por `pff_passCoverage` enfrentada y por `pff_passCoverageType` (Man, Zone, Other).

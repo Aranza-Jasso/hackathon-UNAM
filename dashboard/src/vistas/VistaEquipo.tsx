@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { rutas, useApi } from '../api'
 import type { Filtros, ReporteEquipo } from '../tipos'
 import { useColorEquipo } from '../equipos'
@@ -34,6 +34,15 @@ export function VistaEquipo({ onAbrir }: Props) {
   const color = useColorEquipo(abbr)
   const r = reporte.datos
 
+  // "Tiempo extra" solo aparece si el equipo elegido jugó tiempo extra (14 de 32 equipos).
+  const cuartos = r?.equipo_abbr === abbr ? r.cuartos_disponibles : [1, 2, 3, 4]
+  const hayTiempoExtra = cuartos.includes(5)
+  useEffect(() => {
+    // Si estaba filtrado en tiempo extra y el nuevo equipo no lo jugó, se quita el filtro de cuarto.
+    if (r?.equipo_abbr === abbr && filtros.cuarto !== null && !r.cuartos_disponibles.includes(filtros.cuarto))
+      setFiltros((f) => ({ ...f, cuarto: null }))
+  }, [r, abbr, filtros.cuarto])
+
   const setFiltro = (k: keyof Filtros, v: string) =>
     setFiltros((f) => ({ ...f, [k]: v === '' ? null : k === 'distancia' ? v : Number(v) }))
 
@@ -51,7 +60,8 @@ export function VistaEquipo({ onAbrir }: Props) {
         <SelectFiltro etiqueta="Distancia" valor={filtros.distancia ?? ''} onCambio={(v) => setFiltro('distancia', v)}
           opciones={[['corta', 'Corta (1–3)'], ['media', 'Media (4–7)'], ['larga', 'Larga (8+)']]} />
         <SelectFiltro etiqueta="Cuarto" valor={filtros.cuarto?.toString() ?? ''} onCambio={(v) => setFiltro('cuarto', v)}
-          opciones={[['1', 'Q1'], ['2', 'Q2'], ['3', 'Q3'], ['4', 'Q4'], ['5', 'Tiempo extra']]} />
+          opciones={[['1', 'Q1'], ['2', 'Q2'], ['3', 'Q3'], ['4', 'Q4'],
+            ...(hayTiempoExtra ? [['5', 'Tiempo extra'] as [string, string]] : [])]} />
         <button className="boton" onClick={() => setFiltros(SIN_FILTROS)}>Quitar filtros</button>
       </div>
 

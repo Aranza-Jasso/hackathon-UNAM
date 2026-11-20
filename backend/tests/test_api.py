@@ -36,6 +36,15 @@ def test_filtro_down():
     assert r["equipo"]["n"] == len(r["jugadas"])
 
 
+def test_cuartos_disponibles():
+    # 14 equipos jugaron tiempo extra (TEN 17 jugadas); KC no.
+    assert get("/api/equipos/TEN/reporte").json()["cuartos_disponibles"] == [1, 2, 3, 4, 5]
+    assert get("/api/equipos/KC/reporte").json()["cuartos_disponibles"] == [1, 2, 3, 4]
+    con_te = [e for e in get("/api/equipos").json() if 5 in get(f"/api/equipos/{e}/reporte").json()["cuartos_disponibles"]]
+    assert len(con_te) == 14
+    assert get("/api/equipos/TEN/reporte", cuarto=5).json()["equipo"]["n"] == 17
+
+
 def test_filtros_combinados():
     r = get("/api/equipos/KC/reporte", down=3, distancia="larga", cuarto=2).json()
     assert all(j["down"] == 3 and j["yardsToGo"] >= 8 and j["quarter"] == 2 for j in r["jugadas"])

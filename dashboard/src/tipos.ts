@@ -37,6 +37,7 @@ export type Filtros = { down: number | null; distancia: string | null; cuarto: n
 export type ReporteEquipo = {
   equipo_abbr: string
   filtros: Filtros
+  cuartos_disponibles: number[]
   equipo: Resumen
   liga: Resumen
   formaciones: Comparado[]
